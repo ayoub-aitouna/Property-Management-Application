@@ -1,0 +1,53 @@
+version: '3.8'
+services:
+  backend:
+    image: backend
+    build: ./backend/
+    networks:
+      - mynetwork
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/:/app/src
+
+  frontend:
+    image: frontend
+    build: ./frontend/
+    networks:
+      - mynetwork
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/:/app/src
+    depends_on:
+      - backend
+
+  database:
+    image: postgres
+    networks:
+      - mynetwork
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+  
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - mynetwork
+    depends_on:
+      - database
+
+volumes:
+  db-data:
+
+networks:
+  mynetwork:
+    driver: bridge
