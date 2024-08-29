@@ -27,5 +27,3 @@ class PropertyDetailsSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'address', 'apartment_type',
                   'number_of_units', 'rental_cost', 'manager', 'tenants']
 
-
-class 
