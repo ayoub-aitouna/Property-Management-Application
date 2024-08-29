@@ -2,17 +2,20 @@ version: '3.8'
 services:
   backend:
     image: backend
-    build: ./backend/
+    build: ./backend/build-tools/
+    container_name: backend
     networks:
       - mynetwork
     ports:
       - "8000:8000"
     volumes:
       - ./backend/:/app/src
-
+    depends_on:
+      - database
   frontend:
     image: frontend
     build: ./frontend/
+    container_name: frontend
     networks:
       - mynetwork
     ports:
@@ -24,6 +27,7 @@ services:
 
   database:
     image: postgres
+    container_name: database
     networks:
       - mynetwork
     ports:
@@ -37,6 +41,7 @@ services:
   
   adminer:
     image: adminer
+    container_name: adminer
     restart: always
     ports:
       - 8080:8080
