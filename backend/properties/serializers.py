@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Properties
-from users.serializers import TenantSerializer, UserSerializer
+from users.serializers import TenantSerializer
+from authentication.serializers import UserSerializer
 
 
 class PropertySerializer(serializers.ModelSerializer):
@@ -27,3 +28,15 @@ class PropertyDetailsSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'address', 'apartment_type',
                   'number_of_units', 'rental_cost', 'manager', 'tenants']
 
+
+class PropertyFilterSerializer(serializers.Serializer):
+    location = serializers.CharField(
+        required=False, help_text='Filter by location substring.')
+    rental_min_cost = serializers.DecimalField(
+        max_digits=10, decimal_places=2, required=False, help_text='Filter by minimum rental cost.')
+    rental_max_cost = serializers.DecimalField(
+        max_digits=10, decimal_places=2, required=False, help_text='Filter by maximum rental cost.')
+    apartment_type = serializers.CharField(
+        required=False, help_text='Filter by apartment type.')
+    sort_by = serializers.ChoiceField(choices=['name', 'address', 'apartment_type',
+                                      'number_of_units', 'rental_cost'], required=False, help_text='Sort by field.')

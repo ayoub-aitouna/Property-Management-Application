@@ -37,14 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'drf_yasg',
+    'drf_spectacular',
     'rest_framework',
+    'django_filters',
     'corsheaders',
     'api',
     'authentication',
     'users',
     'properties',
     'payments',
+    'django_apscheduler',
 ]
 
 MIDDLEWARE = [
@@ -137,6 +139,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
@@ -146,4 +149,13 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 30
+}
+
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Property Management API',
+    'DESCRIPTION': 'Property Management description',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SCHEMA_PATH_PREFIX': r'/api/v1/',
 }
