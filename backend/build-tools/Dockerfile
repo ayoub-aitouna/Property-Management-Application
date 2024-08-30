@@ -14,5 +14,6 @@ COPY requirements.txt .
 
 RUN pip3 install -r requirements.txt
 
-ENTRYPOINT [ "sh", "build-tools/start.sh" ]
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+ENTRYPOINT [ "tail", "-f", "/dev/null" ]
+# ENTRYPOINT [ "sh", "build-tools/start.sh" ]
+# CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
