@@ -28,7 +28,7 @@ cd Property-Management-Application
 Copy the example environment file and fill out the necessary values:
 
 ```bash
-mv .env.example .env
+mv .example.env .env
 ```
 
 Edit the `.env` file to include your database credentials and other required settings.
