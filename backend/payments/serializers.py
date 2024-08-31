@@ -8,6 +8,7 @@ from users.serializers import TenantSerializer
 class PaymentSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(
         view_name='payment-details', lookup_field='pk')
+    payment_date = serializers.DateField(read_only=True)
 
     class Meta:
         model = Payment

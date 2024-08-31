@@ -1,11 +1,11 @@
 from django.db import models
 from users.models import Tenant
-from django.contrib.auth import get_user_model
+import datetime
 
 
 class Payment(models.Model):
     tenant = models.ForeignKey(Tenant, on_delete=models.CASCADE)
-    payment_date = models.DateField()
+    payment_date = models.DateField(default=datetime.date.today)
     settled = models.BooleanField(default=False)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     property = models.ForeignKey(

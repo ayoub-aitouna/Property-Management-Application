@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 services:
   backend:
     image: backend
@@ -14,19 +14,6 @@ services:
       - database
     env_file:
       - .env
-      
-  frontend:
-    image: frontend
-    build: ./frontend/
-    container_name: frontend
-    networks:
-      - mynetwork
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend/:/app/src
-    depends_on:
-      - backend
 
   database:
     image: postgres
@@ -55,7 +42,6 @@ services:
 
 volumes:
   db-data:
-
 
 networks:
   mynetwork:

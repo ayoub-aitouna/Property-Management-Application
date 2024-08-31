@@ -160,3 +160,5 @@ SPECTACULAR_SETTINGS = {
     'SERVE_INCLUDE_SCHEMA': False,
     'SCHEMA_PATH_PREFIX': r'/api/v1/',
 }
+
+TESTING= 'test' in os.sys.argv

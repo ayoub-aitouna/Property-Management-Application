@@ -3,15 +3,16 @@ from rest_framework.test import APIClient
 from properties.models import Properties
 from users.models import Tenant
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.utils import timezone
+from payments.models import Payment
 
 
 class UsersBaseTestCase(TestCase):
 
     def setUp(self):
         self.client = APIClient()
+
         self.firstUser = get_user_model().objects.create_user(
             username='firstUser', password='password', first_name='User', last_name='One')
         self.secondUser = get_user_model().objects.create_user(
@@ -32,6 +33,13 @@ class UsersBaseTestCase(TestCase):
             contract_start_date=timezone.now(),
             contract_end_date=timezone.now() + timezone.timedelta(days=365)
         )
+
+        self.payment = Payment.objects.create(
+            tenant=self.tenant,
+            property=self.property,
+            amount=1000,
+            payment_date=timezone.now(),
+            settled=False)
 
         self.AuthenticatedClient(self.firstUser)
 

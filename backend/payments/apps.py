@@ -9,6 +9,6 @@ class PaymentsConfig(AppConfig):
     def ready(self):
         post_migrate.connect(self.Startup, sender=self)
 
-    def Startup(**kwargs):
+    def Startup(self, **kwargs):
         from . import scheduler
         scheduler.startScheduler()

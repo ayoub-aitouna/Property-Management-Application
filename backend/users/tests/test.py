@@ -20,7 +20,6 @@ class UsersTestCase(UsersBaseTestCase):
             'contract_end_date': timezone.now().date() + timezone.timedelta(days=365),
             'section_occupied': 'B',
         })
-        print(f'Create Response: {res.data}, {res.status_code}')
         self.assertEqual(res.status_code, 201)
 
     def test_retrieve(self):
